@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
 
 
 
@@ -15,8 +17,6 @@ const sassRules = {
     "sass-loader",
   ],
 }
-
-
 
 module.exports = {
   entry: './src/index.js',
@@ -37,6 +37,14 @@ module.exports = {
       filename: "./css/styles.css"
     }),
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        sourceMap: true,
+      }),
+    ]
+  },
 
   devtool: 'source-map',
 }
